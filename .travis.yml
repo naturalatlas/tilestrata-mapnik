@@ -22,5 +22,4 @@ script:
   - npm install
   - npm install tilestrata
   # execute tests
-  - make test
-  - make test-ci-coverage || exit 0
+  - make test && (make test-ci-coverage || true)
