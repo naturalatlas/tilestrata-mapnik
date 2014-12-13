@@ -26,8 +26,8 @@ server.registerLayer(function(layer) {
     layer.registerRoute('tile@2x.png', function(handler) {
         layer.registerProvider(mapnik({
             xml: '/path/to/map.xml',
-            scale: 1,
-            tileSize: 256
+            scale: 2,
+            tileSize: 512
         }));
     });
 });

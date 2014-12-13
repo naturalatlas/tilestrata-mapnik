@@ -28,7 +28,6 @@
   },
   "devDependencies": {
     "chai": "^1.10.0",
-    "img-diff": "^0.1.2",
     "mocha": "^2.0.1"
   },
   "peerDependencies": {

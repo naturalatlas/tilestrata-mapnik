@@ -4,7 +4,6 @@ var TileRequest = tilestrata.TileRequest;
 var mapnik = require('../index.js');
 var assert = require('chai').assert;
 var fs = require('fs');
-var imgdiff = require('img-diff').imagesMatch;
 
 describe('Provider Implementation "mapnik"', function() {
 	describe('serve()', function() {
@@ -22,8 +21,7 @@ describe('Provider Implementation "mapnik"', function() {
 
 					var im_actual = buffer.toString('base64');
 					var im_expected = fs.readFileSync(__dirname + '/fixtures/world.png').toString('base64');
-					try { imgdiff(im_actual, im_expected, 0.02); }
-					catch (e) { throw new Error('Result too different from fixture'); }
+					assert.equal(im_actual, im_expected);
 
 					done();
 				});
