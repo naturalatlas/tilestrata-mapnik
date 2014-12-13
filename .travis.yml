@@ -17,8 +17,10 @@ before_install:
   - nvm use $NODE_NVM_VERSION
   - node --version
   - npm --version
-  - npm install tilestrata
 script:
+  # dependencies
+  - npm install
+  - npm install tilestrata
   # execute tests
   - make test
   - make test-ci-coverage || exit 0
