@@ -3,6 +3,7 @@ var MapnikBackend = require('tilelive-mapnik');
 
 module.exports = function(options) {
 	options = _.defaults(options, {
+		interactivity: false,
 		xml: null,
 		metatile: 2,
 		resolution: 4,
@@ -44,12 +45,29 @@ module.exports = function(options) {
 	 * @param {function} callback(err, buffer, headers)
 	 * @return {void}
 	 */
-	function serve(server, req, callback) {
+	function serveImage(server, req, callback) {
 		source.getTile(req.z, req.x, req.y, callback);
+	}
+
+	/**
+	 * Renders a an interactivity tile (JSON).
+	 *
+	 * @param {TileServer} server
+	 * @param {TileRequest} req
+	 * @param {function} callback(err, buffer, headers)
+	 * @return {void}
+	 */
+	function serveGrid(server, req, callback) {
+		source.getGrid(req.z, req.x, req.y, function(err, json, headers) {
+			if (err) return callback(err);
+			var buffer = new Buffer(JSON.stringify(json), 'utf8');
+			buffer._utfgrid = json;
+			callback(err, buffer, headers);
+		});
 	}
 
 	return {
 		init: initialize,
-		serve: serve
+		serve: options.interactivity ? serveGrid : serveImage
 	};
 };

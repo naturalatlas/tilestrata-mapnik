@@ -3,7 +3,7 @@
 [![Build Status](http://img.shields.io/travis/naturalatlas/tilestrata-mapnik/master.svg?style=flat)](https://travis-ci.org/naturalatlas/tilestrata-mapnik)
 [![Coverage Status](http://img.shields.io/coveralls/naturalatlas/tilestrata-mapnik/master.svg?style=flat)](https://coveralls.io/r/naturalatlas/tilestrata-mapnik)
 
-A [TileStrata](https://github.com/naturalatlas/tilestrata) plugin for rendering tiles with [mapnik](http://mapnik.org/). This package will use the latest version of [node-mapnik](https://github.com/mapnik/node-mapnik), unless it's already in your dependency tree (which allows you to pin it to version if needed).
+A [TileStrata](https://github.com/naturalatlas/tilestrata) plugin for rendering tiles with [mapnik](http://mapnik.org/). This package will use the latest version of [node-mapnik](https://github.com/mapnik/node-mapnik), unless it's already in your dependency tree (which allows you to pin it to a version if needed).
 
 ```sh
 $ npm install tilestrata-mapnik --save
@@ -21,6 +21,14 @@ server.registerLayer(function(layer) {
             xml: '/path/to/map.xml',
             scale: 1,
             tileSize: 256
+        }));
+    });
+    layer.registerRoute('tile.json', function(handler) {
+        layer.registerProvider(mapnik({
+            xml: '/path/to/map.xml',
+            scale: 1,
+            tileSize: 256,
+            interactivity: true
         }));
     });
     layer.registerRoute('tile@2x.png', function(handler) {

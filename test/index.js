@@ -27,5 +27,25 @@ describe('Provider Implementation "mapnik"', function() {
 				});
 			});
 		});
+		it('should render interactivity tiles', function(done) {
+			var server = new TileServer();
+			var req = TileRequest.parse('/layer/0/0/0/tile.json');
+
+			var provider = mapnik({xml: __dirname + '/data/test.xml', interactivity: true});
+			provider.init(server, function(err) {
+				assert.isFalse(!!err);
+				provider.serve(server, req, function(err, buffer, headers) {
+					assert.isFalse(!!err);
+					assert.deepEqual(headers, {'Content-Type': 'application/json'});
+					assert.instanceOf(buffer, Buffer);
+
+					var data_actual = buffer.toString('base64');
+					var data_expected = fs.readFileSync(__dirname + '/fixtures/world.json').toString('base64');
+					assert.equal(data_actual, data_expected);
+
+					done();
+				});
+			});
+		});
 	});
 });
