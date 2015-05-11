@@ -14,31 +14,19 @@ $ npm install tilestrata-mapnik --save
 ```js
 var mapnik = require('tilestrata-mapnik');
 
-server.registerLayer(function(layer) {
-    layer.setName('mylayer');
-    layer.registerRoute('tile.png', function(handler) {
-        layer.registerProvider(mapnik({
+server.layer('mylayer')
+    .route('tile.png').use(mapnik({
             xml: '/path/to/map.xml',
             scale: 1,
             tileSize: 256
         }));
-    });
-    layer.registerRoute('tile.json', function(handler) {
-        layer.registerProvider(mapnik({
-            xml: '/path/to/map.xml',
-            scale: 1,
-            tileSize: 256,
-            interactivity: true
-        }));
-    });
-    layer.registerRoute('tile@2x.png', function(handler) {
-        layer.registerProvider(mapnik({
-            xml: '/path/to/map.xml',
-            scale: 2,
-            tileSize: 512
-        }));
-    });
-});
+    })
+    .route('tile.json').use(mapnik({
+        xml: '/path/to/map.xml',
+        scale: 1,
+        tileSize: 256,
+        interactivity: true
+    }));
 ```
 
 ## Contributing
