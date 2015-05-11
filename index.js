@@ -46,7 +46,10 @@ module.exports = function(options) {
 	 * @return {void}
 	 */
 	function serveImage(server, req, callback) {
-		source.getTile(req.z, req.x, req.y, callback);
+		source.getTile(req.z, req.x, req.y, function(err, buffer, headers) {
+			if (err) return callback(err);
+			callback(err, buffer, _.clone(headers));
+		});
 	}
 
 	/**
@@ -62,7 +65,7 @@ module.exports = function(options) {
 			if (err) return callback(err);
 			var buffer = new Buffer(JSON.stringify(json), 'utf8');
 			buffer._utfgrid = json;
-			callback(err, buffer, headers);
+			callback(err, buffer, _.clone(headers));
 		});
 	}
 
