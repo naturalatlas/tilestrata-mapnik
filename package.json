@@ -24,7 +24,7 @@
   "homepage": "https://github.com/naturalatlas/tilestrata-mapnik",
   "dependencies": {
     "lodash": "^2.4.1",
-    "tilelive-mapnik": "^0.6.14"
+    "tilelive-mapnik": "git://github.com/naturalatlas/tilelive-mapnik.git#no-solid-cache"
   },
   "devDependencies": {
     "chai": "^1.10.0",
