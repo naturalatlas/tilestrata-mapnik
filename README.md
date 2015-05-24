@@ -16,10 +16,9 @@ var mapnik = require('tilestrata-mapnik');
 
 server.layer('mylayer')
     .route('tile.png').use(mapnik({
-            xml: '/path/to/map.xml',
-            scale: 1,
-            tileSize: 256
-        }));
+        xml: '/path/to/map.xml',
+        scale: 1,
+        tileSize: 256
     })
     .route('tile.json').use(mapnik({
         xml: '/path/to/map.xml',
