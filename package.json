@@ -1,6 +1,6 @@
 {
   "name": "tilestrata-mapnik",
-  "version": "0.2.3",
+  "version": "0.3.0",
   "description": "A TileStrata plugin for rendering tiles with mapnik",
   "author": "Brian Reavis <brian@naturalatlas.com>",
   "license": "Apache-2.0",
