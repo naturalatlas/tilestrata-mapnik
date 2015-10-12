@@ -12,10 +12,11 @@ describe('Provider Implementation "mapnik"', function() {
 			var req = TileRequest.parse('/layer/0/0/0/tile.png');
 
 			var provider = mapnik({xml: __dirname + '/data/test.xml'});
+			assert.equal(provider.name, 'mapnik');
 			provider.init(server, function(err) {
-				assert.isFalse(!!err);
+				if (err) throw err;
 				provider.serve(server, req, function(err, buffer, headers) {
-					assert.isFalse(!!err);
+					if (err) throw err;
 					assert.deepEqual(headers, {'Content-Type': 'image/png'});
 					assert.instanceOf(buffer, Buffer);
 
@@ -33,9 +34,9 @@ describe('Provider Implementation "mapnik"', function() {
 
 			var provider = mapnik({xml: __dirname + '/data/test.xml', interactivity: true});
 			provider.init(server, function(err) {
-				assert.isFalse(!!err);
+				if (err) throw err;
 				provider.serve(server, req, function(err, buffer, headers) {
-					assert.isFalse(!!err);
+					if (err) throw err;
 					assert.deepEqual(headers, {'Content-Type': 'application/json'});
 					assert.instanceOf(buffer, Buffer);
 

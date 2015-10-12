@@ -70,6 +70,7 @@ module.exports = function(options) {
 	}
 
 	return {
+		name: 'mapnik',
 		init: initialize,
 		serve: options.interactivity ? serveGrid : serveImage
 	};

@@ -2,8 +2,8 @@
   "name": "tilestrata-mapnik",
   "version": "0.2.3",
   "description": "A TileStrata plugin for rendering tiles with mapnik",
-  "author": "Brian Reavis <brian@thirdroute.com>",
-  "license": "Apache License, v2.0",
+  "author": "Brian Reavis <brian@naturalatlas.com>",
+  "license": "Apache-2.0",
   "main": "index.js",
   "scripts": {
     "test": "mocha -R tap"
@@ -23,12 +23,12 @@
   },
   "homepage": "https://github.com/naturalatlas/tilestrata-mapnik",
   "dependencies": {
-    "lodash": "^2.4.1",
-    "tilelive-mapnik": "https://github.com/naturalatlas/tilelive-mapnik/archive/no-solid-cache.tar.gz"
+    "lodash": "^3.10.1",
+    "tilelive-mapnik": "^0.6.17"
   },
   "devDependencies": {
-    "chai": "^1.10.0",
-    "mocha": "^2.0.1"
+    "chai": "^3.3.0",
+    "mocha": "^2.3.3"
   },
   "peerDependencies": {
     "tilestrata": "*"

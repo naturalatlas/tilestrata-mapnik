@@ -1,6 +1,6 @@
 # tilestrata-mapnik
 [![NPM version](http://img.shields.io/npm/v/tilestrata-mapnik.svg?style=flat)](https://www.npmjs.org/package/tilestrata-mapnik)
-[![Build Status](http://img.shields.io/travis/naturalatlas/tilestrata-mapnik/master.svg?style=flat)](https://travis-ci.org/naturalatlas/tilestrata-mapnik)
+[![Build Status](https://travis-ci.org/naturalatlas/tilestrata-mapnik.svg)](https://travis-ci.org/naturalatlas/tilestrata-mapnik)
 [![Coverage Status](http://img.shields.io/coveralls/naturalatlas/tilestrata-mapnik/master.svg?style=flat)](https://coveralls.io/r/naturalatlas/tilestrata-mapnik)
 
 A [TileStrata](https://github.com/naturalatlas/tilestrata) plugin for rendering tiles with [mapnik](http://mapnik.org/). This package will use the latest version of [node-mapnik](https://github.com/mapnik/node-mapnik), unless it's already in your dependency tree (which allows you to pin it to a version if needed).
@@ -38,7 +38,7 @@ $ npm test
 
 ## License
 
-Copyright &copy; 2014 [Brian Reavis](https://github.com/brianreavis) & [Contributors](https://github.com/naturalatlas/tilestrata-mapnik/graphs/contributors)
+Copyright &copy; 2014-2015 [Natural Atlas, Inc.](https://github.com/naturalatlas) & [Contributors](https://github.com/naturalatlas/tilestrata-mapnik/graphs/contributors)
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at: http://www.apache.org/licenses/LICENSE-2.0
 
