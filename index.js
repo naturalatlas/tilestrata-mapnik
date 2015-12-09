@@ -22,15 +22,7 @@ module.exports = function(options) {
 	 * @return {void}
 	 */
 	function initialize(server, callback) {
-		var url = 'mapnik://' + options.xml + '?' + [
-			'metatile=' + options.metatile,
-			'resolution=' + options.resolution,
-			'bufferSize=' + options.bufferSize,
-			'tileSize=' + options.tileSize,
-			'scale=' + options.scale
-		].join('&');
-
-		new MapnikBackend(url, function(err, result) {
+		new MapnikBackend(options, function(err, result) {
 			source = result;
 			callback(err);
 		});

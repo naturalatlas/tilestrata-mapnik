@@ -16,12 +16,12 @@ var mapnik = require('tilestrata-mapnik');
 
 server.layer('mylayer')
     .route('tile.png').use(mapnik({
-        xml: '/path/to/map.xml',
+        pathname: '/path/to/map.xml',
         scale: 1,
         tileSize: 256
     })
     .route('tile.json').use(mapnik({
-        xml: '/path/to/map.xml',
+        xml: 'string of mapnik xml',
         scale: 1,
         tileSize: 256,
         interactivity: true
