@@ -1,6 +1,7 @@
 var tilestrata = require('tilestrata');
 var TileServer = tilestrata.TileServer;
 var TileRequest = tilestrata.TileRequest;
+var imageSize = require('image-size');
 var mapnik = require('../index.js');
 var assert = require('chai').assert;
 var fs = require('fs');
@@ -24,6 +25,24 @@ describe('Provider Implementation "mapnik"', function() {
 					var im_expected = fs.readFileSync(__dirname + '/fixtures/world.png').toString('base64');
 					assert.equal(im_actual, im_expected);
 
+					done();
+				});
+			});
+		});
+		it('should acknowledge "tileSize" option', function(done) {
+			var server = new TileServer();
+			var req = TileRequest.parse('/layer/0/0/0/tile.png');
+
+			var provider = mapnik({pathname: __dirname + '/data/test.xml', tileSize: 512, scale: 2});
+			provider.init(server, function(err) {
+				if (err) throw err;
+				provider.serve(server, req, function(err, buffer, headers) {
+					if (err) throw err;
+					assert.deepEqual(headers, {'Content-Type': 'image/png'});
+					assert.instanceOf(buffer, Buffer);
+					var resultSize = imageSize(buffer);
+					assert.equal(resultSize.width, 512, 'actual width');
+					assert.equal(resultSize.height, 512, 'actual height');
 					done();
 				});
 			});

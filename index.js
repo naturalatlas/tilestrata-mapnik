@@ -22,7 +22,16 @@ module.exports = function(options) {
 	 * @return {void}
 	 */
 	function initialize(server, callback) {
-		new MapnikBackend(options, function(err, result) {
+		var uri = {query: _.clone(options)};
+		if (uri.query.pathname) {
+			uri.pathname = uri.query.pathname;
+			delete uri.query.pathname;
+		}
+		if (uri.query.xml) {
+			uri.xml = uri.query.xml;
+			delete uri.query.xml;
+		}
+		new MapnikBackend(uri, function(err, result) {
 			source = result;
 			callback(err);
 		});
