@@ -5,6 +5,7 @@ ISTANBUL=node_modules/.bin/istanbul
 COVERALLS=node_modules/.bin/coveralls
 
 test:
+	cd tilelive-mapnik && ../node_modules/.bin/_mocha test
 	npm test
 
 test-ci-coverage:

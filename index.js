@@ -1,8 +1,7 @@
-var _ = require('lodash');
-var MapnikBackend = require('tilelive-mapnik');
+var MapnikBackend = require('./tilelive-mapnik/lib/mapnik_backend');
 
 module.exports = function(options) {
-	options = _.defaults(options, {
+	options = Object.assign({
 		interactivity: false,
 		xml: null,
 		metatile: 2,
@@ -10,7 +9,7 @@ module.exports = function(options) {
 		bufferSize: 128,
 		tileSize: 256,
 		scale: 1
-	});
+	}, options);
 
 	var source;
 
@@ -22,7 +21,7 @@ module.exports = function(options) {
 	 * @return {void}
 	 */
 	function initialize(server, callback) {
-		var uri = {query: _.clone(options)};
+		var uri = { query: Object.assign({}, options) };
 		if (uri.query.pathname) {
 			uri.pathname = uri.query.pathname;
 			delete uri.query.pathname;
@@ -49,7 +48,7 @@ module.exports = function(options) {
 	function serveImage(server, req, callback) {
 		source.getTile(req.z, req.x, req.y, function(err, buffer, headers) {
 			if (err) return callback(err);
-			callback(err, buffer, _.clone(headers));
+			callback(err, buffer, Object.assign({}, headers));
 		});
 	}
 
@@ -64,9 +63,9 @@ module.exports = function(options) {
 	function serveGrid(server, req, callback) {
 		source.getGrid(req.z, req.x, req.y, function(err, json, headers) {
 			if (err) return callback(err);
-			var buffer = new Buffer(JSON.stringify(json), 'utf8');
+			var buffer = Buffer.from(JSON.stringify(json), 'utf8');
 			buffer._utfgrid = json;
-			callback(err, buffer, _.clone(headers));
+			callback(err, buffer, Object.assign({}, headers));
 		});
 	}
 
