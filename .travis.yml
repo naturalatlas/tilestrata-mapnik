@@ -3,8 +3,8 @@ os:
   - linux
 env:
   matrix:
-    - NODE_NVM_VERSION="12" NODE_MAPNIK_VERSION=4 UPDATE=1
-    - NODE_NVM_VERSION="10" NODE_MAPNIK_VERSION=4
+    - NODE_NVM_VERSION="12" NODE_MAPNIK_VERSION=4 MAPNIK_FORK=@naturalatlas/mapnik # https://github.com/mapnik/node-mapnik/pull/959
+    - NODE_NVM_VERSION="10" NODE_MAPNIK_VERSION=4 MAPNIK_FORK=@naturalatlas/mapnik # https://github.com/mapnik/node-mapnik/pull/959
     - NODE_NVM_VERSION="8" NODE_MAPNIK_VERSION=3.7
 before_install:
   # install c++11 capable libstdc++ without sudo
@@ -21,5 +21,7 @@ script:
   - npm install --fallback-to-build=false
   - npm install tilestrata
   - npm install mapnik@$NODE_MAPNIK_VERSION
+  - if [[ "${MAPNIK_FORK}" != "" ]]; then npm install module-alias@2 $MAPNIK_FORK@$NODE_MAPNIK_VERSION; fi;
+  - if [[ "${MAPNIK_FORK}" == "" ]]; then npm install mapnik@$NODE_MAPNIK_VERSION; fi;
   # execute tests
   - make test && (make test-ci-coverage || true)
